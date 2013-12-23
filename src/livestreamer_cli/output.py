@@ -2,6 +2,7 @@ import os
 import shlex
 import subprocess
 import sys
+import time
 
 from time import sleep
 
@@ -45,6 +46,8 @@ class Output(object):
 
 class FileOutput(Output):
     def __init__(self, filename=None, fd=None):
+        if os.path.isdir(filename):
+            filename = os.path.dirname(filename) + time.strftime("\%Y.%m.%d.") + time.strftime("%H%M%S.ts")
         self.filename = filename
         self.fd = fd
 
