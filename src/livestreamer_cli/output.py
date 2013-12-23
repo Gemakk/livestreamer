@@ -47,7 +47,8 @@ class Output(object):
 class FileOutput(Output):
     def __init__(self, filename=None, fd=None):
         if os.path.isdir(filename):
-            filename = os.path.dirname(filename) + time.strftime("\%Y.%m.%d.%H%M%S.ts")
+            filename = '%(directory)s%(timestamp)s.ts' % {'directory': os.path.dirname(filename),
+                                                        'timestamp': time.strftime("\%Y.%m.%d.%H%M%S")}
         self.filename = filename
         self.fd = fd
 
